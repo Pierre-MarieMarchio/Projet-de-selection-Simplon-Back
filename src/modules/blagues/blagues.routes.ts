@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { blaguesController } from "./blagues.controller";
+import { BlaguesController } from "./blagues.controller";
 
 const router = Router();
+const blaguesController = new BlaguesController();
 
-router.get("/", blaguesController.getBlagues);
-router.get("/error", blaguesController.getError);
+router.get("/", blaguesController.getAll);
+router.get("/:id", blaguesController.getById);
+router.post("/", blaguesController.create);
+router.put("/:id", blaguesController.update);
+router.delete("/:id", blaguesController.delete);
 
 export default router;
