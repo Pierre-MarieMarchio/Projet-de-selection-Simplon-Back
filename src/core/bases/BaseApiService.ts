@@ -9,20 +9,40 @@ export abstract class BaseApiService<T extends IBaseEntity> {
     this._repository = repositopry;
   }
 
+  protected filterToInterface(data: any): T {
+    const prototype = this.getInterfacePrototype();
+
+    const filtered: Partial<T> = {};
+
+    for (const key in prototype) {
+      if (data.hasOwnProperty(key)) {
+        filtered[key] = data[key];
+      }
+    }
+
+    return filtered as T;
+  }
+
+  protected filterArrayToInterface(dataArray: any[]): T[] {
+    return dataArray.map((item) => this.filterToInterface(item));
+  }
+
+  protected abstract getInterfacePrototype(): T;
+
   public async getAll(): Promise<T[]> {
     const result = await this._repository.findAll();
-    return result;
+    return this.filterArrayToInterface(result);
   }
 
   public async getById(id: string): Promise<T> {
     const result = await this._repository.findById(id);
-    return result;
+    return this.filterToInterface(result);
   }
 
   public async create(data: T): Promise<T> {
     const id = uuidv4();
     const result = await this._repository.create({ ...data, id });
-    return result;
+    return this.filterToInterface(result);
   }
 
   public async updateById(id: string, data: T): Promise<T> {
@@ -30,12 +50,20 @@ export abstract class BaseApiService<T extends IBaseEntity> {
       throw new Error("Id from params and request does not match");
     }
 
-    const result = await this._repository.updateById(id, data);
-    return result;
+    const entity = await this._repository.findById(data.id);
+    const result = await this._repository.updateById(entity.id, entity);
+
+    return this.filterToInterface(result);
   }
 
-  public async DeleteById(id: string): Promise<T> {
-    const result = await this._repository.deleteById(id);
-    return result;
+  public async DeleteById(id: string, data: T): Promise<T> {
+    if (id != data.id) {
+      throw new Error("Id from params and request does not match");
+    }
+
+    const entity = await this._repository.findById(data.id);
+    const result = await this._repository.deleteById(entity.id);
+
+    return this.filterToInterface(result);
   }
 }

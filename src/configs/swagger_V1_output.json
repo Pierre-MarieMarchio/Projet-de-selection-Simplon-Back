@@ -1,0 +1,203 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v1.0.0",
+    "title": "Carambar & co Blague API",
+    "description": "Une Api Carambare !!!!"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/V1",
+      "description": "Url de base de l'api"
+    }
+  ],
+  "paths": {
+    "/blagues/": {
+      "get": {
+        "summary": "Récupérer toutes les blagues",
+        "responses": {
+          "200": {
+            "description": "Liste des blagues récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/BlagueResponse" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Ajouter une nouvelle blague",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BlagueCreateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Blague ajoutée avec succès",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlagueResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          }
+        }
+      }
+    },
+    "/blagues/{id}": {
+      "get": {
+        "summary": "Récupérer une blague par son ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blague récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlagueResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Blague non trouvée"
+          }
+        }
+      },
+      "put": {
+        "summary": "Mettre à jour une blague",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BlagueRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blague mise à jour avec succès",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlagueResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Blague non trouvée"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprimer une blague",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BlagueRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blague supprimée avec succès"
+          },
+          "404": {
+            "description": "Blague non trouvée"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "BlagueResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "5a54429e-1528-459a-bd78-0b0f4d5bbec3"
+          },
+          "question": {
+            "type": "string",
+            "example": "Pourquoi les plongeurs plongent-ils toujours en arrière ?"
+          },
+          "response": {
+            "type": "string",
+            "example": "Parce que sinon ils tombent dans le bateau."
+          }
+        }
+      },
+      "BlagueRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "5a54429e-1528-459a-bd78-0b0f4d5bbec3"
+          },
+          "question": {
+            "type": "string",
+            "example": "Pourquoi les plongeurs plongent-ils toujours en arrière ?"
+          },
+          "response": {
+            "type": "string",
+            "example": "Parce que sinon ils tombent dans le bateau."
+          }
+        }
+      },
+      "BlagueCreateRequest": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "example": "Pourquoi les plongeurs plongent-ils toujours en arrière ?"
+          },
+          "response": {
+            "type": "string",
+            "example": "Parce que sinon ils tombent dans le bateau."
+          }
+        }
+      }
+    }
+  }
+}

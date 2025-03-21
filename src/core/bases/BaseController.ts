@@ -4,7 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler";
 import { BaseApiService } from "./BaseApiService";
 import { IBaseEntity } from "../interfaces/IBaseEntity.interface";
 
-export abstract class BaseController<T extends IBaseEntity> {
+export abstract class BaseController<T extends IBaseEntity, R extends Request> {
   protected readonly _modelService: BaseApiService<T>;
 
   constructor(modelService: BaseApiService<T>) {
@@ -21,18 +21,18 @@ export abstract class BaseController<T extends IBaseEntity> {
     return res.json(result);
   });
 
-  public create = asyncHandler(async (req: Request, res: Response) => {
+  public create = asyncHandler(async (req: R, res: Response) => {
     const result = await this._modelService.create(req.body);
     return res.json(result);
   });
 
-  public update = asyncHandler(async (req: Request, res: Response) => {
+  public update = asyncHandler(async (req: R, res: Response) => {
     const result = await this._modelService.updateById(req.params.id, req.body);
     return res.json(result);
   });
 
-  public delete = asyncHandler(async (req: Request, res: Response) => {
-    const result = await this._modelService.DeleteById(req.params.id);
+  public delete = asyncHandler(async (req: R, res: Response) => {
+    const result = await this._modelService.DeleteById(req.params.id, req.body);
     return res.json(result);
   });
 }

@@ -1,8 +1,8 @@
 import { Router } from "express";
-import blagurRoute from "./modules/blagues/blagues.routes";
+import blagueRoutes from "./modules/blagues/blagues.routes";
 
 const router = Router();
 
-router.use("/blagues", blagurRoute);
+router.use("/blagues", blagueRoutes);
 
 export default router;

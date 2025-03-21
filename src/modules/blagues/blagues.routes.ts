@@ -5,6 +5,7 @@ const router = Router();
 const blaguesController = new BlaguesController();
 
 router.get("/", blaguesController.getAll);
+router.get("/random", blaguesController.getRandom);
 router.get("/:id", blaguesController.getById);
 router.post("/", blaguesController.create);
 router.put("/:id", blaguesController.update);

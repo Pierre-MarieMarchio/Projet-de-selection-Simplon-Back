@@ -4,7 +4,7 @@ import {
   InferAttributes,
   InferCreationAttributes,
 } from "sequelize";
-import { database } from "../../config/database";
+import { database } from "../../configs/database";
 
 export class BlagueModel extends Model<
   InferAttributes<BlagueModel>,
