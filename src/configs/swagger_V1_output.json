@@ -54,7 +54,7 @@
         }
       }
     },
-    "/blagues/randome": {
+    "/blagues/random": {
       "get": {
         "summary": "Récupérer une blague aléatoire",
         "responses": {
