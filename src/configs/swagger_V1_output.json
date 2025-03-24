@@ -54,6 +54,24 @@
         }
       }
     },
+    "/blagues/randome": {
+      "get": {
+        "summary": "Récupérer une blague aléatoire",
+        "responses": {
+          "200": {
+            "description": "Liste des blagues récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/BlagueResponse" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/blagues/{id}": {
       "get": {
         "summary": "Récupérer une blague par son ID",
@@ -79,23 +97,7 @@
           }
         }
       },
-      "/blagues/random": {
-      "get": {
-        "summary": "Récupérer une blague aléatoirement",
-        "responses": {
-          "200": {
-            "description": "Blague récupérée avec succès",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/BlagueResponse" }
-              }
-            }
-          },
-          "404": {
-            "description": "Blague non trouvée"
-          }
-        }
-      },
+
       "put": {
         "summary": "Mettre à jour une blague",
         "parameters": [
