@@ -79,6 +79,23 @@
           }
         }
       },
+      "/blagues/random": {
+      "get": {
+        "summary": "Récupérer une blague aléatoirement",
+        "responses": {
+          "200": {
+            "description": "Blague récupérée avec succès",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BlagueResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Blague non trouvée"
+          }
+        }
+      },
       "put": {
         "summary": "Mettre à jour une blague",
         "parameters": [
