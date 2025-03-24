@@ -1,4 +1,4 @@
-# Project de Selection Simplon | CDA
+# Projet de Selection Simplon | CDA
 
 ## Technical Specifications
 
