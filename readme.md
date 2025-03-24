@@ -1,4 +1,4 @@
-# Selection Project | CDA
+# Project de Selection Simplon | CDA
 
 ## Technical Specifications
 
@@ -26,8 +26,8 @@ Ensure you have the following installed on your machine:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repo-url.git
-   cd your-repo-folder
+   git clone https://github.com/Pierre-MarieMarchio/Projet-de-selection-Simplon-Back.git
+   cd Projet-de-selection-Simplon-Back
    ```
 
 2. Install dependencies:
@@ -53,17 +53,21 @@ The API should now be running at http://localhost:<YOUR_PORT>/.
 ## Build the Project
 
 To compile the TypeScript code into JavaScript, run:
+
 ```bash
 npm run build
 ```
+
 This will generate a dist/ directory containing the compiled files.
 
 ## Start in Production Mode
 
 After building the project, you can start the production server with:
+
 ```bash
 npm run start
 ```
+
 The API will run using the compiled JavaScript files from dist/.
 
 ## Environment Variables in Production
@@ -132,6 +136,7 @@ PUT /api/v1/blagues/{id}
 ```http
 DELETE /api/v1/blagues/{id}
 ```
+
 **Request Body:**
 
 ```json
